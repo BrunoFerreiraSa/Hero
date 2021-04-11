@@ -54,6 +54,4 @@ export default function Logon(){
     );
 }
 
-/**
- * aula 3 - 1:23:50 parada
- */
+
