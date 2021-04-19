@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:mobile_flutter/pages/Detail/detail.page.dart';
 import 'package:mobile_flutter/pages/Incidents/incident.card.dart';
 
 class Incidents extends StatefulWidget {
@@ -90,15 +91,29 @@ class _IncidentsState extends State<Incidents> {
             height: 450,
             width: MediaQuery.of(context).size.width,
             child: ListView.builder(
-                itemCount: data.length,
-                addAutomaticKeepAlives: true,
-                itemBuilder: (context, i) {
-                  return IncidentCard(
-                    ong: data[i]['name'],
-                    caso: data[i]['description'],
-                    value: double.parse(data[i]['value'].toString()),
-                  );
-                }),
+              itemCount: data.length,
+              addAutomaticKeepAlives: true,
+              itemBuilder: (context, i) {
+                return IncidentCard(
+                  ong: data[i]['name'],
+                  caso: data[i]['description'],
+                  value: double.parse(data[i]['value'].toString()),
+                  isVisible: true,
+                  onPress: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Detail(
+                        ong: data[i]['name'],
+                        caso: data[i]['description'],
+                        value: double.parse(data[i]['value'].toString()),
+                        email: data[i]['email'],
+                        whatsapp: data[i]['whatsapp'],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),

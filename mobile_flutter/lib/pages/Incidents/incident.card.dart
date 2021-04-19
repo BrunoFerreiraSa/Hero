@@ -5,12 +5,17 @@ class IncidentCard extends StatelessWidget {
   String ong = "";
   String caso = "";
   double value = 0;
+  bool isVisible;
+  VoidCallback? onPress;
 
   IncidentCard({
+    Key? key,
     required this.ong,
     required this.caso,
     required this.value,
-  });
+    this.isVisible = false,
+    this.onPress,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,25 +67,27 @@ class IncidentCard extends StatelessWidget {
               ),
             ),
             Spacer(),
-            Row(
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Ver mais detalhes",
-                    style: TextStyle(
-                      color: Color(0xffE02041),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Spacer(),
-                Icon(
-                  Icons.arrow_forward,
-                  color: Color(0xffE02041),
-                ),
-              ],
-            ),
+            isVisible
+                ? Row(
+                    children: [
+                      TextButton(
+                        onPressed: onPress,
+                        child: Text(
+                          "Ver mais detalhes",
+                          style: TextStyle(
+                            color: Color(0xffE02041),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      Icon(
+                        Icons.arrow_forward,
+                        color: Color(0xffE02041),
+                      ),
+                    ],
+                  )
+                : Container(),
           ],
         ),
       ),
