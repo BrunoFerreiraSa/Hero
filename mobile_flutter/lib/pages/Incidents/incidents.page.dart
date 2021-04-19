@@ -88,7 +88,7 @@ class _IncidentsState extends State<Incidents> {
           ),
           SizedBox(height: 30),
           Container(
-            height: 450,
+            height: MediaQuery.of(context).size.height * 0.68,
             width: MediaQuery.of(context).size.width,
             child: ListView.builder(
               itemCount: data.length,
