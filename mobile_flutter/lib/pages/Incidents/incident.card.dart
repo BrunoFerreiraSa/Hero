@@ -7,6 +7,7 @@ class IncidentCard extends StatelessWidget {
   double value = 0;
   bool isVisible;
   VoidCallback? onPress;
+  double heightCard;
 
   IncidentCard({
     Key? key,
@@ -15,58 +16,89 @@ class IncidentCard extends StatelessWidget {
     required this.value,
     this.isVisible = false,
     this.onPress,
+    this.heightCard = 200,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 1,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
       child: Container(
-        height: 200,
+        height: heightCard,
         width: double.infinity,
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.fromBorderSide(
+            BorderSide(color: Colors.white),
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "ONG:",
-              style: TextStyle(
-                color: Colors.black,
+            Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "ONG: ",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    ong,
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
             ),
-            Text(
-              ong,
-              style: TextStyle(
-                color: Colors.black,
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Caso:",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    caso,
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
             ),
-            Spacer(),
-            Text(
-              "Caso:",
-              style: TextStyle(
-                color: Colors.black,
+            Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "VALOR:",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    "R\$ $value",
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
             ),
-            Text(
-              caso,
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            Spacer(),
-            Text(
-              "VALOR:",
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            Text(
-              "R\$ $value",
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            Spacer(),
             isVisible
                 ? Row(
                     children: [
@@ -87,7 +119,7 @@ class IncidentCard extends StatelessWidget {
                       ),
                     ],
                   )
-                : Container(),
+                : SizedBox(),
           ],
         ),
       ),

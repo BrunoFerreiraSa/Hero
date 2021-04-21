@@ -38,9 +38,10 @@ class Detail extends StatelessWidget {
             ),
           ],
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[100],
         elevation: 0,
       ),
+      backgroundColor: Colors.grey[100],
       body: body(),
     );
   }
@@ -59,8 +60,14 @@ class Detail extends StatelessWidget {
             caso: caso,
             value: value,
           ),
-          SizedBox(height: 20),
-          Card(
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.fromBorderSide(
+                BorderSide(color: Colors.white),
+              ),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(

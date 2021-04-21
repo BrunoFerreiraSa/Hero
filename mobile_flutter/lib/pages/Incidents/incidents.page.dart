@@ -11,12 +11,16 @@ class Incidents extends StatefulWidget {
 
 class _IncidentsState extends State<Incidents> {
   List data = [];
+  String? dataLength;
+  int page = 1;
   Future<String> getData() async {
     final String url = 'http://192.168.1.103:3333/incidents';
 
     var resp = await http.get(Uri.parse(url));
+
     setState(() {
       data = json.decode(resp.body);
+      dataLength = resp.headers["x-total-count"];
     });
 
     return "";
@@ -41,7 +45,7 @@ class _IncidentsState extends State<Incidents> {
             ),
             Spacer(),
             Text(
-              "Total de ${data.length} casos",
+              "Total de $dataLength casos",
               style: TextStyle(
                 color: Colors.grey,
                 fontSize: 18,
@@ -49,10 +53,10 @@ class _IncidentsState extends State<Incidents> {
             ),
           ],
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[100],
         elevation: 0,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[100],
       body: body(context),
     );
   }
@@ -87,16 +91,14 @@ class _IncidentsState extends State<Incidents> {
             ],
           ),
           SizedBox(height: 30),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.68,
-            width: MediaQuery.of(context).size.width,
+          Expanded(
             child: ListView.builder(
               itemCount: data.length,
               addAutomaticKeepAlives: true,
               itemBuilder: (context, i) {
                 return IncidentCard(
                   ong: data[i]['name'],
-                  caso: data[i]['description'],
+                  caso: data[i]['title'],
                   value: double.parse(data[i]['value'].toString()),
                   isVisible: true,
                   onPress: () => Navigator.push(
@@ -115,6 +117,7 @@ class _IncidentsState extends State<Incidents> {
               },
             ),
           ),
+          SizedBox(height: 16),
         ],
       ),
     );
